@@ -1,11 +1,11 @@
 import { title } from "@/components/primitives";
 import Quote from "@/components/dashboard/quote";
 
-export default function BlogPage() {
+export default function DashboardPage() {
 	return (
 		<div>
+			<h1 className={title()}>Dashboard</h1>
 			<Quote />
-			<h1 className={title()}>Blog</h1>
 		</div>
 	);
 }
