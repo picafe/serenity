@@ -1,3 +1,4 @@
+"use client"
 import { title } from "@/components/primitives";
 import Quote from "@/components/dashboard/quote";
 

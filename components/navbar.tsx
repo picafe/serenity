@@ -1,3 +1,4 @@
+"use client"
 import {
 	Navbar as NextUINavbar,
 	NavbarContent,
@@ -8,10 +9,9 @@ import {
 	NavbarMenuItem,
 
 } from "@nextui-org/navbar";
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { Button } from "@nextui-org/button";
-import { Kbd } from "@nextui-org/kbd";
 import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
 
 import { link as linkStyles } from "@nextui-org/theme";
 
@@ -29,8 +29,21 @@ import {
 } from "@/components/icons";
 
 import { Logo } from "@/components/icons";
+import { Database } from "@/app/lib/database.types";
+import { useEffect, useState } from "react";
 
 export const Navbar = () => {
+	const supabase = createClientComponentClient<Database>();
+	const [user, setUser] = useState<any>(null)
+	useEffect(() => {
+		const getUser = async () => {
+			const {
+				data: { user },
+		  } = await supabase.auth.getUser()
+		  setUser(user)
+		}
+		getUser();
+	}, [])
 	return (
 		<NextUINavbar maxWidth="xl" position="sticky">
 			<NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -78,10 +91,10 @@ export const Navbar = () => {
 					<Button
 						as={Link}
 						className="text-sm font-semibold text-gray-100 bg-gradient-to-tr from-violet-400 to-indigo-700 hover:bg-violet-200"
-						href={"/login"}
+						href={user ? "/dashboard" : "/login"}
 						variant="flat"
 					>
-						Login
+						{user ? "Dashboard" : "Login"}
 					</Button>
 				</NavbarItem>
 			</NavbarContent>

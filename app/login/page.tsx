@@ -47,7 +47,7 @@ export default function LoginPage() {
 			showLinks={false}
 			theme="dark"
 			providers={[]}
-			redirectTo={`https://localhost:3001/dashboard`}
+			redirectTo={`http://localhost:3001/dashboard`}
 		/>;
 		  case 'magicLink':
 			return <Auth
@@ -71,7 +71,7 @@ export default function LoginPage() {
 			showLinks={false}
 			theme="dark"
 			providers={[]}
-			redirectTo={`https://localhost:3001/auth/callback`}
+			redirectTo={`http://localhost:3001/api/auth/callback`}
 		/>;
 		  case 'signUp':
 			return <Auth
@@ -95,7 +95,7 @@ export default function LoginPage() {
 			showLinks={false}
 			theme="dark"
 			providers={[]}
-			redirectTo={`http://localhost:3001/auth/callback`}
+			redirectTo={`http://localhost:3001/api/auth/callback`}
 		/>;
 		  default:
 			return <Auth
