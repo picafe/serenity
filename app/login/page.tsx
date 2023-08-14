@@ -47,7 +47,7 @@ export default function LoginPage() {
 			showLinks={false}
 			theme="dark"
 			providers={[]}
-			redirectTo={`https://serenity.picafe.me/dashboard`}
+			redirectTo="https://serenity.picafe.me/dashboard"
 		/>;
 		  case 'magicLink':
 			return <Auth
@@ -71,7 +71,7 @@ export default function LoginPage() {
 			showLinks={false}
 			theme="dark"
 			providers={[]}
-			redirectTo={`https://serenity.picafe.me/api/auth/callback`}
+			redirectTo="https://serenity.picafe.me/api/auth/callback"
 		/>;
 		  case 'signUp':
 			return <Auth
@@ -95,7 +95,7 @@ export default function LoginPage() {
 			showLinks={false}
 			theme="dark"
 			providers={[]}
-			redirectTo={`https://serenity.picafe.me/api/auth/callback`}
+			redirectTo="https://serenity.picafe.me/api/auth/callback"
 		/>;
 		  default:
 			return <Auth
@@ -119,7 +119,7 @@ export default function LoginPage() {
 			showLinks={false}
 			theme="dark"
 			providers={[]}
-			redirectTo={`https://serenity.picafe.me/dashboard`}
+			redirectTo="https://serenity.picafe.me/dashboard"
 		/>;
 		}
 	}
