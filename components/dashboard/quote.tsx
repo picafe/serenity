@@ -13,7 +13,7 @@ export default function Quote() {
         try {
             const response = await fetch(api);
             const data = await response.json();
-            const url = `http://localhost:3001/api/quote?title=${data[0].content}&author=${data[0].author}`;
+            const url = `https://serenity.picafe.me/api/quote?title=${data[0].content}&author=${data[0].author}`;
             setImgUrl(url);
             console.log(data[0])
         } catch (error) {

@@ -3,25 +3,25 @@ import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Database } from '@/app/lib/database.types'
-// import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 import { title } from '@/components/primitives'
 
 export default function LoginPage() {
 	const [selectedOption, setSelectedOption] = useState<'signIn' | 'magicLink' | 'signUp'>('signIn');
 	
-	// const router = useRouter()
+	const router = useRouter()
 	const supabase = createClientComponentClient<Database>()
-	
-	//   useEffect(() => {
-	// 	const LoginCheck = setInterval(async () => {
-	// 		const {
-	// 			data: { user },
-	// 		  } = await supabase.auth.getUser()
-	// 		user && router.push('/dashboard')
-	// 	}, 500) 	
-	// 	return () => clearInterval(LoginCheck)
-	// }, [])
+	// supabase AUTHUI redirect doesnt work when logging in (non-magiclink) so i had to make a workaround
+	  useEffect(() => {
+		const LoginCheck = setInterval(async () => {
+			const {
+				data: { user },
+			  } = await supabase.auth.getUser()
+			user && router.push('/dashboard')
+		}, 500) 	
+		return () => clearInterval(LoginCheck)
+	}, [])
 
 	const renderComponent = () => {
 		switch (selectedOption) {
@@ -47,7 +47,7 @@ export default function LoginPage() {
 			showLinks={false}
 			theme="dark"
 			providers={[]}
-			redirectTo={`http://localhost:3001/dashboard`}
+			redirectTo={`https://serenity.picafe.me/dashboard`}
 		/>;
 		  case 'magicLink':
 			return <Auth
@@ -71,7 +71,7 @@ export default function LoginPage() {
 			showLinks={false}
 			theme="dark"
 			providers={[]}
-			redirectTo={`http://localhost:3001/api/auth/callback`}
+			redirectTo={`https://serenity.picafe.me/api/auth/callback`}
 		/>;
 		  case 'signUp':
 			return <Auth
@@ -95,7 +95,7 @@ export default function LoginPage() {
 			showLinks={false}
 			theme="dark"
 			providers={[]}
-			redirectTo={`http://localhost:3001/api/auth/callback`}
+			redirectTo={`https://serenity.picafe.me/api/auth/callback`}
 		/>;
 		  default:
 			return <Auth
@@ -119,7 +119,7 @@ export default function LoginPage() {
 			showLinks={false}
 			theme="dark"
 			providers={[]}
-			redirectTo={`http://localhost:3001/dashboard`}
+			redirectTo={`https://serenity.picafe.me/dashboard`}
 		/>;
 		}
 	}
@@ -127,7 +127,7 @@ export default function LoginPage() {
 
 	return (
 		<div>
-			<div className="flex justify-stretch items-center">
+			<div className="flex justify-stretch sm:justify-center items-center">
       <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
         <div className="flex justify-center mb-4">
           <h2 className={title()}>Welcome</h2>
@@ -147,7 +147,7 @@ export default function LoginPage() {
               selectedOption === 'magicLink' ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-700'
             }`}
           >
-            Sign In with Magic Link
+            Magic Link
           </button>
           <button
             onClick={() => setSelectedOption('signUp')}
